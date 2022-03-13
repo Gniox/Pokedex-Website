@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { fetchGeneration } from "../pokeapi/something";
 import { v4 as uuidv4 } from "uuid";
+import "@testing-library/jest-dom/extend-expect";
 
 async function parseGenerationData() {
   const generationData = await fetchGeneration();

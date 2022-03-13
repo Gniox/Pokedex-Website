@@ -2,9 +2,8 @@ import React from "react";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 import GenerationCounter from "../components/GenerationCounter";
-import { render, screen } from "@testing-library/react";
+import { render, screen, act } from "@testing-library/react";
 import fetchMock from "jest-fetch-mock";
-import { act } from "react-dom/test-utils";
 
 require("jest-fetch-mock").enableMocks();
 
@@ -106,9 +105,9 @@ describe("GenerationCounter", () => {
       render(<GenerationCounter />);
     });
 
-    const generation = screen.getByRole("list-item");
     const expected = "generation-i";
+    const list = await findByText("generation-i");
 
-    expect(generation.textContent).toBe(expected);
+    expect(list.textContent).toBe(expected);
   });
 });
