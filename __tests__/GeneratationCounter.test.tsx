@@ -4,6 +4,7 @@ import { setupServer } from "msw/node";
 import GenerationCounter from "../components/GenerationCounter";
 import { render, screen, act } from "@testing-library/react";
 import fetchMock from "jest-fetch-mock";
+import '@testing-library/jest-dom/extend-expect';
 
 require("jest-fetch-mock").enableMocks();
 
@@ -106,7 +107,7 @@ describe("GenerationCounter", () => {
     });
 
     const expected = "generation-i";
-    const list = await findByText("generation-i");
+    const list = await screen.findByText("generation-i");
 
     expect(list.textContent).toBe(expected);
   });
