@@ -10,6 +10,7 @@ async function parseGenerationData() {
   return new Promise<[]>((resolve, reject) => {
     resolve(generationJSON.results);
   });
+  //something new
 }
 
 const GenerationCounter = () => {
