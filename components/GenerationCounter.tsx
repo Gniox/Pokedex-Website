@@ -1,6 +1,6 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
-import { fetchGeneration } from '../pokeapi/something';
-import { v4 as uuidv4 } from 'uuid';
+import React, { FunctionComponent, useEffect, useState } from "react";
+import { fetchGeneration } from "../pokeapi/something";
+import { v4 as uuidv4 } from "uuid";
 
 async function parseGenerationData() {
   const generationData = await fetchGeneration();
@@ -11,7 +11,6 @@ async function parseGenerationData() {
   });
 }
 
-//TODO: install jsdom for testing
 const GenerationCounter = () => {
   type genItem = {
     name: string;
@@ -28,7 +27,8 @@ const GenerationCounter = () => {
   const [generationList, setGenerationList] = React.useState<genItem[]>([]);
 
   useEffect(() => {
-    fetch('https://pokeapi.co/api/v2/generation')
+    let isMounted = true;
+    fetch("https://pokeapi.co/api/v2/generation")
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -36,18 +36,23 @@ const GenerationCounter = () => {
         throw response;
       })
       .then((data: genList) => {
-        setGenerationList(data.results);
+        if (isMounted) {
+          setGenerationList(data.results);
+        }
       })
       .catch((error) => {
-        console.error('Error fetching data: ' + error);
+        console.error("Error fetching data: " + error);
       });
-  });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <div>
       <ul>
         {generationList.map((item) => (
-          <li key={uuidv4()}>item.name</li>
+          <li key={uuidv4()}>{item.name}</li>
         ))}
       </ul>
     </div>
