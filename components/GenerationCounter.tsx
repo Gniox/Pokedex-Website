@@ -52,9 +52,9 @@ const GenerationCounter = () => {
   return (
     <div>
       <ul>
-        {generationList.map((item) => (
-          <li key={uuidv4()}>{item.name}</li>
-        ))}
+        {generationList.map((item) => {
+          return <li key={uuidv4()}>{item.name}</li>;
+        })}
       </ul>
     </div>
   );
