@@ -1,16 +1,6 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
-import { fetchGeneration } from "../pokeapi/something";
+import React, { useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-
-async function parseGenerationData() {
-  const generationData = await fetchGeneration();
-  const generationJSON = JSON.parse(generationData);
-
-  return new Promise<[]>((resolve, reject) => {
-    resolve(generationJSON.results);
-  });
-  //something new
-}
+import UpArrow from "./UpArrow";
 
 const GenerationCounter = () => {
   type genItem = {
@@ -50,13 +40,16 @@ const GenerationCounter = () => {
   }, []);
 
   return (
-    <div>
-      <ul>
-        {generationList.map((item) => {
-          return <li key={uuidv4()}>{item.name}</li>;
-        })}
-      </ul>
-    </div>
+    <>
+      <UpArrow />
+      <div>
+        <ul>
+          {generationList.map((item) => {
+            return <li key={uuidv4()}>{item.name}</li>;
+          })}
+        </ul>
+      </div>
+    </>
   );
 };
 

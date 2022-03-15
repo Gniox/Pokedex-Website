@@ -1,7 +1,7 @@
 import React from "react";
 // import { rest } from "msw";
 // import { setupServer } from "msw/node";
-import GenerationCounter from "../components/GenerationCounter";
+import GenerationCounter from "../components/GenerationCounter/GenerationCounter";
 import { render, screen, act, within } from "@testing-library/react";
 import fetchMock from "jest-fetch-mock";
 
