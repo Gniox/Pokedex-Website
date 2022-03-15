@@ -1,8 +1,21 @@
 import React, { useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import UpArrow from "./UpArrow";
+import DownArrow from "./DownArrow";
+import styled from "styled-components";
 
-const GenerationCounter = () => {
+const Div = styled.div`
+  display: flex;
+  align-items: center;
+  justify: center;
+  flex-direction: column;
+`;
+
+const StyledList = styled.ul`
+  list-style-type: none;
+`;
+
+const GenerationCounter: React.FC = () => {
   type genItem = {
     name: string;
     url: string;
@@ -39,17 +52,18 @@ const GenerationCounter = () => {
     };
   }, []);
 
+  //TODO: figure out a way to await li generation before returning component
+  //      (buttons are instant while list takes a split second to load)
   return (
-    <>
+    <Div>
       <UpArrow />
-      <div>
-        <ul>
-          {generationList.map((item) => {
-            return <li key={uuidv4()}>{item.name}</li>;
-          })}
-        </ul>
-      </div>
-    </>
+      <StyledList>
+        {generationList.map((item) => {
+          return <li key={uuidv4()}>{item.name}</li>;
+        })}
+      </StyledList>
+      <DownArrow />
+    </Div>
   );
 };
 
