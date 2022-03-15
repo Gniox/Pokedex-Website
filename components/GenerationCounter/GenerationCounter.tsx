@@ -29,7 +29,10 @@ const GenerationCounter: React.FC = () => {
   }
 
   const [generationList, setGenerationList] = React.useState<genItem[]>([]);
+  const [limit, setLimit] = React.useState(3);
+  const [offset, setOffSet] = React.useState(0);
 
+  //use effect for fetch requests
   useEffect(() => {
     let isMounted = true;
     fetch("https://pokeapi.co/api/v2/generation")
@@ -54,11 +57,12 @@ const GenerationCounter: React.FC = () => {
 
   //TODO: figure out a way to await li generation before returning component
   //      (buttons are instant while list takes a split second to load)
+  //      Looks like this was fixed ... works sometimes
   return (
     <Div>
       <UpArrow />
       <StyledList>
-        {generationList.map((item) => {
+        {generationList.slice(offset, limit).map((item) => {
           return <li key={uuidv4()}>{item.name}</li>;
         })}
       </StyledList>

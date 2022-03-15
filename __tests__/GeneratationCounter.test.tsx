@@ -12,7 +12,7 @@ describe("GenerationCounter", () => {
     fetchMock.resetMocks();
   });
 
-  it("Displays Pokemon generations", async () => {
+  it("Displays 3 Pokemon generations", async () => {
     fetchMock.mockResponseOnce(
       JSON.stringify({
         count: 8,
@@ -62,6 +62,18 @@ describe("GenerationCounter", () => {
     const { getAllByRole } = within(list);
     const items = getAllByRole("listitem");
 
-    expect(items.length).toBe(8);
+    expect(items.length).toBe(3);
   });
+  
 });
+
+describe("Down Arrow", () => {
+  it("moves generations count down 3", async () => {
+
+    await act(async () => {
+      render(<GenerationCounter />);
+    });
+
+    const downButton = screen.getByRole('');
+  })
+})
