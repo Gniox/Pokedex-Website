@@ -1,10 +1,17 @@
 import React from "react";
 import * as s from "../../styles/button.styled";
+import styled from "styled-components";
+
+const UpButton = styled(s.Button).attrs({
+  "aria-label": "up",
+})``;
 
 //TODO: find way to keep svg from disappearing on rerender
-const UpArrow = () => {
+const UpArrow: React.FC<{
+  onClick?: React.MouseEventHandler<HTMLElement>;
+}> = ({ onClick }) => {
   return (
-    <s.Button>
+    <UpButton onClick={onClick}>
       <svg
         version="1.1"
         id="Layer_1"
@@ -35,7 +42,7 @@ const UpArrow = () => {
         <g></g>
         <g></g>
       </svg>
-    </s.Button>
+    </UpButton>
   );
 };
 

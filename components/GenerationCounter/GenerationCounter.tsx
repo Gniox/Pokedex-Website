@@ -29,6 +29,7 @@ const GenerationCounter: React.FC = () => {
   }
 
   const [generationList, setGenerationList] = React.useState<genItem[]>([]);
+  const [listShown, setListShown] = React.useState<genItem[]>([]);
   const [limit, setLimit] = React.useState(3);
   const [offset, setOffSet] = React.useState(0);
 
@@ -45,6 +46,7 @@ const GenerationCounter: React.FC = () => {
       .then((data: genList) => {
         if (isMounted) {
           setGenerationList(data.results);
+          setListShown(data.results.slice(offset, limit));
         }
       })
       .catch((error) => {
@@ -55,18 +57,49 @@ const GenerationCounter: React.FC = () => {
     };
   }, []);
 
+  function moveListUpByThree() {
+    const newLimit = limit - 3;
+    const newOffSet = offset - 3;
+    const newList = generationList.slice(newOffSet, newLimit);
+
+    if (newOffSet > -1) {
+      setListShown(newList);
+      setLimit(newLimit);
+      setOffSet(newOffSet);
+    }
+  }
+
+  //onClick of DownButton, it will move the generation list
+  //down 3 item values.  It will also update the limit and
+  // offset values.
+  function moveListDownByThree() {
+    //to make sure state updates, set values to variable
+    //if using other states, use new value before updating
+    //them as well, as there is delay before the next
+    //re render
+    const newLimit = limit + 3;
+    const newOffSet = offset + 3;
+    const newList = generationList.slice(newOffSet, newLimit);
+
+    if (newOffSet < 9) {
+      setListShown(newList);
+      setLimit(newLimit);
+      setOffSet(newOffSet);
+    }
+  }
+
   //TODO: figure out a way to await li generation before returning component
   //      (buttons are instant while list takes a split second to load)
   //      Looks like this was fixed ... works sometimes
   return (
     <Div>
-      <UpArrow />
+      <UpArrow onClick={moveListUpByThree} />
       <StyledList>
-        {generationList.slice(offset, limit).map((item) => {
+        {listShown.map((item) => {
           return <li key={uuidv4()}>{item.name}</li>;
         })}
       </StyledList>
-      <DownArrow />
+      <DownArrow onClick={moveListDownByThree} />
     </Div>
   );
 };

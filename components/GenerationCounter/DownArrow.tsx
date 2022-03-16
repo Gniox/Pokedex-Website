@@ -1,10 +1,19 @@
 import React from "react";
 import * as s from "../../styles/button.styled";
+import styled from "styled-components";
+
+// Don't need to add button, as screen readers
+// will read element role
+const DownButton = styled(s.Button).attrs({
+  "aria-label": "down",
+})``;
 
 //TODO: find way to keep svg from disappearing on rerender
-const DownArrow = () => {
+const DownArrow: React.FC<{
+  onClick?: React.MouseEventHandler<HTMLElement>;
+}> = ({ onClick }) => {
   return (
-    <s.Button>
+    <DownButton onClick={onClick}>
       <svg
         version="1.1"
         id="Layer_1"
@@ -35,7 +44,7 @@ const DownArrow = () => {
         <g></g>
         <g></g>
       </svg>
-    </s.Button>
+    </DownButton>
   );
 };
 

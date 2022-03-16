@@ -13,6 +13,6 @@ export const Button = styled.button`
   }
   svg {
     outline: none;
-    transition: transform 0.3s linear;
+    transition: transform 0.1s linear;
   }
 `;
