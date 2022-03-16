@@ -5,19 +5,27 @@ import fetchMock from "jest-fetch-mock";
 
 require("jest-fetch-mock").enableMocks();
 
+//TODO: Find a better way to hold mock JSON data...
 describe("GenerationCounter", () => {
-  const mockData = '{"count":8,"next":null,"previous":null,"results":[{"name":"generation-i","url":"https://pokeapi.co/api/v2/generation/1/"},{"name":"generation-ii","url":"https://pokeapi.co/api/v2/generation/2/"},{"name":"generation-iii","url":"https://pokeapi.co/api/v2/generation/3/"},{"name":"generation-iv","url":"https://pokeapi.co/api/v2/generation/4/"},{"name":"generation-v","url":"https://pokeapi.co/api/v2/generation/5/"},{"name":"generation-vi","url":"https://pokeapi.co/api/v2/generation/6/"},{"name":"generation-vii","url":"https://pokeapi.co/api/v2/generation/7/"},{"name":"generation-viii","url":"https://pokeapi.co/api/v2/generation/8/"}]}'
+    const mockData =
+    '{"count":8,"next":null,"previous":null,"results":' +
+    '[{"name":"generation-i","url":"https://pokeapi.co/api/v2/generation/1/"},' +
+    '{"name":"generation-ii","url":"https://pokeapi.co/api/v2/generation/2/"},' +
+    '{"name":"generation-iii","url":"https://pokeapi.co/api/v2/generation/3/"},' +
+    '{"name":"generation-iv","url":"https://pokeapi.co/api/v2/generation/4/"},' +
+    '{"name":"generation-v","url":"https://pokeapi.co/api/v2/generation/5/"},' +
+    '{"name":"generation-vi","url":"https://pokeapi.co/api/v2/generation/6/"},' +
+    '{"name":"generation-vii","url":"https://pokeapi.co/api/v2/generation/7/"},' +
+    '{"name":"generation-viii","url":"https://pokeapi.co/api/v2/generation/8/"}]}';
 
-  const jsonObject = JSON.parse(mockData);
+  const jsonObject = JSON.parse(mockData); 
 
   beforeEach(() => {
     fetchMock.resetMocks();
   });
 
   it("Displays 3 Pokemon generations", async () => {
-    fetchMock.mockResponseOnce(
-      JSON.stringify(jsonObject)
-    );
+    fetchMock.mockResponseOnce(JSON.stringify(jsonObject));
     await act(async () => {
       render(<GenerationCounter />);
     });
@@ -32,6 +40,23 @@ describe("GenerationCounter", () => {
 
 //  Make sure to mock AP call...
 describe("Down Arrow", () => {
+  const mockData =
+    '{"count":8,"next":null,"previous":null,"results":' +
+    '[{"name":"generation-i","url":"https://pokeapi.co/api/v2/generation/1/"},' +
+    '{"name":"generation-ii","url":"https://pokeapi.co/api/v2/generation/2/"},' +
+    '{"name":"generation-iii","url":"https://pokeapi.co/api/v2/generation/3/"},' +
+    '{"name":"generation-iv","url":"https://pokeapi.co/api/v2/generation/4/"},' +
+    '{"name":"generation-v","url":"https://pokeapi.co/api/v2/generation/5/"},' +
+    '{"name":"generation-vi","url":"https://pokeapi.co/api/v2/generation/6/"},' +
+    '{"name":"generation-vii","url":"https://pokeapi.co/api/v2/generation/7/"},' +
+    '{"name":"generation-viii","url":"https://pokeapi.co/api/v2/generation/8/"}]}';
+
+  const jsonObject = JSON.parse(mockData);
+
+  beforeEach(() => {
+    fetchMock.resetMocks();
+  });
+
   it("moves generations count down 3", async () => {
     const generation = [
       "generation-i",
@@ -44,47 +69,7 @@ describe("Down Arrow", () => {
       "generation-viii",
     ];
 
-    fetchMock.mockResponseOnce(
-      JSON.stringify({
-        count: 8,
-        next: null,
-        previous: null,
-        results: [
-          {
-            name: "generation-i",
-            url: "https://pokeapi.co/api/v2/generation/1/",
-          },
-          {
-            name: "generation-ii",
-            url: "https://pokeapi.co/api/v2/generation/2/",
-          },
-          {
-            name: "generation-iii",
-            url: "https://pokeapi.co/api/v2/generation/3/",
-          },
-          {
-            name: "generation-iv",
-            url: "https://pokeapi.co/api/v2/generation/4/",
-          },
-          {
-            name: "generation-v",
-            url: "https://pokeapi.co/api/v2/generation/5/",
-          },
-          {
-            name: "generation-vi",
-            url: "https://pokeapi.co/api/v2/generation/6/",
-          },
-          {
-            name: "generation-vii",
-            url: "https://pokeapi.co/api/v2/generation/7/",
-          },
-          {
-            name: "generation-viii",
-            url: "https://pokeapi.co/api/v2/generation/8/",
-          },
-        ],
-      })
-    );
+    fetchMock.mockResponseOnce(JSON.stringify(jsonObject));
 
     await act(async () => {
       render(<GenerationCounter />);
@@ -121,47 +106,7 @@ describe("Down Arrow", () => {
       "generation-viii",
     ];
 
-    fetchMock.mockResponseOnce(
-      JSON.stringify({
-        count: 8,
-        next: null,
-        previous: null,
-        results: [
-          {
-            name: "generation-i",
-            url: "https://pokeapi.co/api/v2/generation/1/",
-          },
-          {
-            name: "generation-ii",
-            url: "https://pokeapi.co/api/v2/generation/2/",
-          },
-          {
-            name: "generation-iii",
-            url: "https://pokeapi.co/api/v2/generation/3/",
-          },
-          {
-            name: "generation-iv",
-            url: "https://pokeapi.co/api/v2/generation/4/",
-          },
-          {
-            name: "generation-v",
-            url: "https://pokeapi.co/api/v2/generation/5/",
-          },
-          {
-            name: "generation-vi",
-            url: "https://pokeapi.co/api/v2/generation/6/",
-          },
-          {
-            name: "generation-vii",
-            url: "https://pokeapi.co/api/v2/generation/7/",
-          },
-          {
-            name: "generation-viii",
-            url: "https://pokeapi.co/api/v2/generation/8/",
-          },
-        ],
-      })
-    );
+    fetchMock.mockResponseOnce(JSON.stringify(jsonObject));
 
     await act(async () => {
       render(<GenerationCounter />);
@@ -190,6 +135,23 @@ describe("Down Arrow", () => {
   });
 
   describe("Up Arrow", () => {
+    const mockData =
+      '{"count":8,"next":null,"previous":null,"results":' +
+      '[{"name":"generation-i","url":"https://pokeapi.co/api/v2/generation/1/"},' +
+      '{"name":"generation-ii","url":"https://pokeapi.co/api/v2/generation/2/"},' +
+      '{"name":"generation-iii","url":"https://pokeapi.co/api/v2/generation/3/"},' +
+      '{"name":"generation-iv","url":"https://pokeapi.co/api/v2/generation/4/"},' +
+      '{"name":"generation-v","url":"https://pokeapi.co/api/v2/generation/5/"},' +
+      '{"name":"generation-vi","url":"https://pokeapi.co/api/v2/generation/6/"},' +
+      '{"name":"generation-vii","url":"https://pokeapi.co/api/v2/generation/7/"},' +
+      '{"name":"generation-viii","url":"https://pokeapi.co/api/v2/generation/8/"}]}';
+
+    const jsonObject = JSON.parse(mockData);
+
+    beforeEach(() => {
+      fetchMock.resetMocks();
+    });
+
     it("moves generations count up 3", async () => {
       const generation = [
         "generation-i",
@@ -202,47 +164,7 @@ describe("Down Arrow", () => {
         "generation-viii",
       ];
 
-      fetchMock.mockResponseOnce(
-        JSON.stringify({
-          count: 8,
-          next: null,
-          previous: null,
-          results: [
-            {
-              name: "generation-i",
-              url: "https://pokeapi.co/api/v2/generation/1/",
-            },
-            {
-              name: "generation-ii",
-              url: "https://pokeapi.co/api/v2/generation/2/",
-            },
-            {
-              name: "generation-iii",
-              url: "https://pokeapi.co/api/v2/generation/3/",
-            },
-            {
-              name: "generation-iv",
-              url: "https://pokeapi.co/api/v2/generation/4/",
-            },
-            {
-              name: "generation-v",
-              url: "https://pokeapi.co/api/v2/generation/5/",
-            },
-            {
-              name: "generation-vi",
-              url: "https://pokeapi.co/api/v2/generation/6/",
-            },
-            {
-              name: "generation-vii",
-              url: "https://pokeapi.co/api/v2/generation/7/",
-            },
-            {
-              name: "generation-viii",
-              url: "https://pokeapi.co/api/v2/generation/8/",
-            },
-          ],
-        })
-      );
+      fetchMock.mockResponseOnce(JSON.stringify(jsonObject));
 
       await act(async () => {
         render(<GenerationCounter />);
@@ -283,47 +205,7 @@ describe("Down Arrow", () => {
         "generation-viii",
       ];
 
-      fetchMock.mockResponseOnce(
-        JSON.stringify({
-          count: 8,
-          next: null,
-          previous: null,
-          results: [
-            {
-              name: "generation-i",
-              url: "https://pokeapi.co/api/v2/generation/1/",
-            },
-            {
-              name: "generation-ii",
-              url: "https://pokeapi.co/api/v2/generation/2/",
-            },
-            {
-              name: "generation-iii",
-              url: "https://pokeapi.co/api/v2/generation/3/",
-            },
-            {
-              name: "generation-iv",
-              url: "https://pokeapi.co/api/v2/generation/4/",
-            },
-            {
-              name: "generation-v",
-              url: "https://pokeapi.co/api/v2/generation/5/",
-            },
-            {
-              name: "generation-vi",
-              url: "https://pokeapi.co/api/v2/generation/6/",
-            },
-            {
-              name: "generation-vii",
-              url: "https://pokeapi.co/api/v2/generation/7/",
-            },
-            {
-              name: "generation-viii",
-              url: "https://pokeapi.co/api/v2/generation/8/",
-            },
-          ],
-        })
-      );
+      fetchMock.mockResponseOnce(JSON.stringify(jsonObject));
 
       await act(async () => {
         render(<GenerationCounter />);
