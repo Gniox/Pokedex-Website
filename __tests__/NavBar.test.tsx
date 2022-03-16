@@ -10,5 +10,6 @@ describe("NavBar", () =>{
     fetchMock.resetMocks();
   })
 
-    
+  it("Displays 6 Pokemon Species Numbers", async () => {
+  })
 })
