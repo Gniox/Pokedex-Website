@@ -6,51 +6,17 @@ import fetchMock from "jest-fetch-mock";
 require("jest-fetch-mock").enableMocks();
 
 describe("GenerationCounter", () => {
+  const mockData = '{"count":8,"next":null,"previous":null,"results":[{"name":"generation-i","url":"https://pokeapi.co/api/v2/generation/1/"},{"name":"generation-ii","url":"https://pokeapi.co/api/v2/generation/2/"},{"name":"generation-iii","url":"https://pokeapi.co/api/v2/generation/3/"},{"name":"generation-iv","url":"https://pokeapi.co/api/v2/generation/4/"},{"name":"generation-v","url":"https://pokeapi.co/api/v2/generation/5/"},{"name":"generation-vi","url":"https://pokeapi.co/api/v2/generation/6/"},{"name":"generation-vii","url":"https://pokeapi.co/api/v2/generation/7/"},{"name":"generation-viii","url":"https://pokeapi.co/api/v2/generation/8/"}]}'
+
+  const jsonObject = JSON.parse(mockData);
+
   beforeEach(() => {
     fetchMock.resetMocks();
   });
 
   it("Displays 3 Pokemon generations", async () => {
     fetchMock.mockResponseOnce(
-      JSON.stringify({
-        count: 8,
-        next: null,
-        previous: null,
-        results: [
-          {
-            name: "generation-i",
-            url: "https://pokeapi.co/api/v2/generation/1/",
-          },
-          {
-            name: "generation-ii",
-            url: "https://pokeapi.co/api/v2/generation/2/",
-          },
-          {
-            name: "generation-iii",
-            url: "https://pokeapi.co/api/v2/generation/3/",
-          },
-          {
-            name: "generation-iv",
-            url: "https://pokeapi.co/api/v2/generation/4/",
-          },
-          {
-            name: "generation-v",
-            url: "https://pokeapi.co/api/v2/generation/5/",
-          },
-          {
-            name: "generation-vi",
-            url: "https://pokeapi.co/api/v2/generation/6/",
-          },
-          {
-            name: "generation-vii",
-            url: "https://pokeapi.co/api/v2/generation/7/",
-          },
-          {
-            name: "generation-viii",
-            url: "https://pokeapi.co/api/v2/generation/8/",
-          },
-        ],
-      })
+      JSON.stringify(jsonObject)
     );
     await act(async () => {
       render(<GenerationCounter />);
