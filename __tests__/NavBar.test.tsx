@@ -45,4 +45,25 @@ describe("NavBar", () => {
 
     expect(items.length).toBe(6);
   });
+  it("is sorted numerically from smallest to largest", async () => {
+    fetchMock.mockResponseOnce(JSON.stringify(jsonObject));
+    await act(async () => {
+      render(<NavBar />);
+    });
+
+    const list = screen.getByRole("list");
+    const { getAllByRole } = within(list);
+    const items = getAllByRole("listitem");
+
+    items.forEach((element, index) => {
+      if (index > 0) {
+        const currentElement: string = element.textContent ?? "0";
+        const previousElement: string = items[index - 1].textContent ?? "0";
+
+        expect(parseInt(currentElement)).toBeGreaterThan(
+          parseInt(previousElement)
+        );
+      }
+    });
+  });
 });

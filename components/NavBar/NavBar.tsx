@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
+import { sortPokemon } from "../../functions/sortPokemon";
 
 const Div = styled.div`
   display: flex;
@@ -44,8 +45,9 @@ const NavBar: React.FC = () => {
       })
       .then((data) => {
         if (isMounted) {
-          setPokeList(data.pokemon_species);
-          setListShown(data.pokemon_species.slice(offset, limit));
+          const sortedPokemon = sortPokemon(data.pokemon_species);
+          setPokeList(sortedPokemon);
+          setListShown(sortedPokemon.slice(offset, limit));
         }
       })
       .catch((error) => {
@@ -60,7 +62,7 @@ const NavBar: React.FC = () => {
     <Div>
       <StyledList>
         {listShown.map((item, index) => {
-          return <StyledListItem key={uuidv4()}>{index+1}</StyledListItem>;
+          return <StyledListItem key={uuidv4()}>{index + 1}</StyledListItem>;
         })}
       </StyledList>
     </Div>
