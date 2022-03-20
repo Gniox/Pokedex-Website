@@ -1,6 +1,6 @@
-import { sortPokemon } from "../functions/sortPokemon";
+import { sortPokemon } from '../functions/sortPokemon';
 
-describe("sortPokemon", () => {
+describe('sortPokemon', () => {
   const mockData =
     '{"pokemon_species":[{"name":"bulbasaur","url":"https://pokeapi.co/api/v2/pokemon-species/1/"},' +
     '{"name":"charmander","url":"https://pokeapi.co/api/v2/pokemon-species/4/"},' +
@@ -48,7 +48,7 @@ describe("sortPokemon", () => {
   const pokeArray = jsonObjectUnsorted.pokemon_species;
   const expectedArray = jsonObjectSorted.pokemon_species;
 
-  it("sorts poke array by url", () => {
+  it('sorts poke array by url', () => {
     const sortedPokemon = sortPokemon(pokeArray);
 
     for (let i = 0; i < expectedArray.length; i++) {
