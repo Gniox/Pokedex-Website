@@ -11,12 +11,12 @@ export function sortPokemon(pokemon: pokeSpecies[]): pokeSpecies[] {
   for (let i = 1; i < pokemon.length; i++) {
     let previousIndex = i - 1;
     let currentIndex = i;
-    let previousPokeValue = pokemon[previousIndex].url.split('/');
-    let currentPokeValue = pokemon[currentIndex].url.split('/');
+    let previousPokeURLSplit = pokemon[previousIndex].url.split('/');
+    let currentPokeURLSplit = pokemon[currentIndex].url.split('/');
 
     while (
-      parseInt(currentPokeValue[currentPokeValue.length - 2]) <
-      parseInt(previousPokeValue[previousPokeValue.length - 2])
+      parseInt(currentPokeURLSplit[currentPokeURLSplit.length - 2]) <
+      parseInt(previousPokeURLSplit[previousPokeURLSplit.length - 2])
     ) {
       const temp = pokemon[previousIndex];
 
@@ -26,8 +26,8 @@ export function sortPokemon(pokemon: pokeSpecies[]): pokeSpecies[] {
       previousIndex--;
       currentIndex--;
 
-      previousPokeValue = pokemon[previousIndex].url.split('/');
-      currentPokeValue = pokemon[currentIndex].url.split('/');
+      previousPokeURLSplit = pokemon[previousIndex].url.split('/');
+      currentPokeURLSplit = pokemon[currentIndex].url.split('/');
     }
   }
 

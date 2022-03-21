@@ -1,5 +1,5 @@
 import React from "react";
-import * as s from "../../styles/button.styled";
+import * as s from "../../../styles/button.styled";
 import styled from "styled-components";
 
 // Don't need to add button, as screen readers

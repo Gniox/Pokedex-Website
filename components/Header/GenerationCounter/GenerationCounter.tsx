@@ -1,18 +1,18 @@
-import React, { useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
-import UpArrow from "./UpArrow";
-import DownArrow from "./DownArrow";
-import styled from "styled-components";
+import React, { useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import UpArrow from './UpArrow';
+import DownArrow from './DownArrow';
+import GenerationCounterItem from './GenerationCounterItem';
+import styled from 'styled-components';
 
 const Div = styled.div`
   display: flex;
-  align-items: center;
-  justify: center;
   flex-direction: column;
 `;
 
 const StyledList = styled.ul`
   list-style-type: none;
+  height: 75px;
 `;
 
 const GenerationCounter: React.FC = () => {
@@ -36,7 +36,7 @@ const GenerationCounter: React.FC = () => {
   //use effect for fetch requests
   useEffect(() => {
     let isMounted = true;
-    fetch("https://pokeapi.co/api/v2/generation")
+    fetch('https://pokeapi.co/api/v2/generation')
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -50,7 +50,7 @@ const GenerationCounter: React.FC = () => {
         }
       })
       .catch((error) => {
-        console.error("Error fetching data: " + error);
+        console.error('Error fetching data: ' + error);
       });
     return () => {
       isMounted = false;
@@ -81,7 +81,7 @@ const GenerationCounter: React.FC = () => {
     const newOffSet = offset + 3;
     const newList = generationList.slice(newOffSet, newLimit);
 
-    if (newOffSet < 9) {
+    if (newOffSet < generationList.length) {
       setListShown(newList);
       setLimit(newLimit);
       setOffSet(newOffSet);
@@ -96,7 +96,13 @@ const GenerationCounter: React.FC = () => {
       <UpArrow onClick={moveListUpByThree} />
       <StyledList>
         {listShown.map((item) => {
-          return <li key={uuidv4()}>{item.name}</li>;
+          return (
+            <GenerationCounterItem
+              name={item.name}
+              url={item.url}
+              key={uuidv4()}
+            />
+          );
         })}
       </StyledList>
       <DownArrow onClick={moveListDownByThree} />

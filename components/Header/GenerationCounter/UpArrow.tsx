@@ -1,5 +1,5 @@
 import React from "react";
-import * as s from "../../styles/button.styled";
+import * as s from "../../../styles/button.styled";
 import styled from "styled-components";
 
 const UpButton = styled(s.Button).attrs({
